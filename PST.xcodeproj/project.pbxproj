@@ -35,6 +35,8 @@
 		1327D0722408B48D00AA0DFB /* PST_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1327D0712408B48D00AA0DFB /* PST_ViewController.m */; };
 		1327D0742408B6EC00AA0DFB /* PST.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1327D0222408B11000AA0DFB /* PST.framework */; };
 		1327D0752408B6EC00AA0DFB /* PST.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1327D0222408B11000AA0DFB /* PST.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1327D0DA240CEABF00AA0DFB /* PST.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1327D0D9240CEABF00AA0DFB /* PST.bundle */; };
+		1327D0DC240CECE300AA0DFB /* PST_System.h in Headers */ = {isa = PBXBuildFile; fileRef = 1327D0DB240CEC3000AA0DFB /* PST_System.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +101,8 @@
 		1327D06E2408B47800AA0DFB /* PST_NavigationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PST_NavigationViewController.m; sourceTree = "<group>"; };
 		1327D0702408B48D00AA0DFB /* PST_ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PST_ViewController.h; sourceTree = "<group>"; };
 		1327D0712408B48D00AA0DFB /* PST_ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PST_ViewController.m; sourceTree = "<group>"; };
+		1327D0D9240CEABF00AA0DFB /* PST.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PST.bundle; sourceTree = "<group>"; };
+		1327D0DB240CEC3000AA0DFB /* PST_System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PST_System.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				1327D0252408B11000AA0DFB /* PST.h */,
+				1327D0DB240CEC3000AA0DFB /* PST_System.h */,
 				1327D02D2408B14700AA0DFB /* PST_HelloWorld.h */,
 				1327D02E2408B14700AA0DFB /* PST_HelloWorld.m */,
 				1327D0262408B11000AA0DFB /* Info.plist */,
@@ -171,6 +176,7 @@
 		1327D0362408B24E00AA0DFB /* PST-APP */ = {
 			isa = PBXGroup;
 			children = (
+				1327D0D9240CEABF00AA0DFB /* PST.bundle */,
 				1327D0372408B24E00AA0DFB /* AppDelegate.h */,
 				1327D0382408B24E00AA0DFB /* AppDelegate.m */,
 				1327D06D2408B47800AA0DFB /* PST_NavigationViewController.h */,
@@ -220,6 +226,7 @@
 			files = (
 				1327D02F2408B14700AA0DFB /* PST_HelloWorld.h in Headers */,
 				1327D0272408B11000AA0DFB /* PST.h in Headers */,
+				1327D0DC240CECE300AA0DFB /* PST_System.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +371,7 @@
 			files = (
 				1327D04A2408B25100AA0DFB /* LaunchScreen.storyboard in Resources */,
 				1327D0472408B25100AA0DFB /* Assets.xcassets in Resources */,
+				1327D0DA240CEABF00AA0DFB /* PST.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +613,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = pst.PST;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -629,6 +638,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = pst.PST;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

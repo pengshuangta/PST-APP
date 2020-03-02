@@ -7,10 +7,30 @@
 //
 
 #import "PST_HelloWorld.h"
+#import "PST_System.h"
+
+@interface PST_HelloWorld()
+
+/* kobeImageview */
+@property (nonatomic,strong) UIImageView *kobeImg;
+
+@end
 
 @implementation PST_HelloWorld
 
 +(NSString *)sayHelloWorld{
     return @"hello world !";
+}
+
+- (void)showKobe{
+    [self kobeImg];
+}
+- (UIImageView *)kobeImg{
+    if (!_kobeImg) {
+        _kobeImg = [[UIImageView alloc] initWithFrame:CGRectMake((PST_ScrrenWidth - 250)/2.0, 100, 250, 250)];
+        [self.VC.view addSubview:_kobeImg];
+        _kobeImg.image = PST_BundleImg(@"pst_kobe");
+    }
+    return _kobeImg;
 }
 @end

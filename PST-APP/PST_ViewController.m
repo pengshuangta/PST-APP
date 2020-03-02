@@ -21,9 +21,12 @@
     
     self.navigationItem.title = @"PST-APP";
     
-    
     NSString *sayString = [PST_HelloWorld sayHelloWorld];
     NSLog(@"%@",sayString);
+    
+    PST_HelloWorld *hellWorld = [PST_HelloWorld new];
+    hellWorld.VC = self;
+    [hellWorld showKobe];
 }
 
 
