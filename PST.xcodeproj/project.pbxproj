@@ -6,6 +6,20 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		1327D08A240CA1DE00AA0DFB /* PSTScript */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 1327D08D240CA1DE00AA0DFB /* Build configuration list for PBXAggregateTarget "PSTScript" */;
+			buildPhases = (
+				1327D08E240CA20A00AA0DFB /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = PSTScript;
+			productName = PSTScript;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		1327D0272408B11000AA0DFB /* PST.h in Headers */ = {isa = PBXBuildFile; fileRef = 1327D0252408B11000AA0DFB /* PST.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1327D02F2408B14700AA0DFB /* PST_HelloWorld.h in Headers */ = {isa = PBXBuildFile; fileRef = 1327D02D2408B14700AA0DFB /* PST_HelloWorld.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -309,6 +323,9 @@
 						CreatedOnToolsVersion = 11.3;
 						TestTargetID = 1327D0342408B24E00AA0DFB;
 					};
+					1327D08A240CA1DE00AA0DFB = {
+						CreatedOnToolsVersion = 11.3;
+					};
 				};
 			};
 			buildConfigurationList = 1327D01C2408B11000AA0DFB /* Build configuration list for PBXProject "PST" */;
@@ -328,6 +345,7 @@
 				1327D0342408B24E00AA0DFB /* PST-APP */,
 				1327D0512408B25200AA0DFB /* PST-APPTests */,
 				1327D05C2408B25200AA0DFB /* PST-APPUITests */,
+				1327D08A240CA1DE00AA0DFB /* PSTScript */,
 			);
 		};
 /* End PBXProject section */
@@ -364,6 +382,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1327D08E240CA20A00AA0DFB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n#要build的target名\nTARGET_NAME=${PROJECT_NAME}\nif [[ $1 ]]\nthen\nTARGET_NAME=$1\nfi\nUNIVERSAL_OUTPUT_FOLDER=\"${SRCROOT}/${PROJECT_NAME}_Products/\"\n\n#创建输出目录，并删除之前的framework文件\nmkdir -p \"${UNIVERSAL_OUTPUT_FOLDER}\"\nrm -rf \"${UNIVERSAL_OUTPUT_FOLDER}/${TARGET_NAME}.framework\"\n\n#分别编译模拟器和真机的Framework\nxcodebuild -target \"${TARGET_NAME}\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\nxcodebuild -target \"${TARGET_NAME}\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphonesimulator BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\n\n#拷贝framework到univer目录\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${TARGET_NAME}.framework\" \"${UNIVERSAL_OUTPUT_FOLDER}\"\n\n#合并framework，输出最终的framework到build目录\nlipo -create -output \"${UNIVERSAL_OUTPUT_FOLDER}/${TARGET_NAME}.framework/${TARGET_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${TARGET_NAME}.framework/${TARGET_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${TARGET_NAME}.framework/${TARGET_NAME}\"\n\n#删除编译之后生成的无关的配置文件\ndir_path=\"${UNIVERSAL_OUTPUT_FOLDER}/${TARGET_NAME}.framework/\"\nfor file in ls $dir_path\ndo\nif [[ ${file} =~ \".xcconfig\" ]]\nthen\nrm -f \"${dir_path}/${file}\"\nfi\ndone\n\n#判断build文件夹是否存在，存在则删除\nif [ -d \"${SRCROOT}/build\" ]\nthen\nrm -rf \"${SRCROOT}/build\"\nfi\n\nrm -rf \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos\"\n\n#打开合并后的文件夹\nopen \"${UNIVERSAL_OUTPUT_FOLDER}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1327D01E2408B11000AA0DFB /* Sources */ = {
@@ -710,6 +748,24 @@
 			};
 			name = Release;
 		};
+		1327D08B240CA1DE00AA0DFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5785DZ2W9F;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		1327D08C240CA1DE00AA0DFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5785DZ2W9F;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -754,6 +810,15 @@
 			buildConfigurations = (
 				1327D06B2408B25200AA0DFB /* Debug */,
 				1327D06C2408B25200AA0DFB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1327D08D240CA1DE00AA0DFB /* Build configuration list for PBXAggregateTarget "PSTScript" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1327D08B240CA1DE00AA0DFB /* Debug */,
+				1327D08C240CA1DE00AA0DFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
